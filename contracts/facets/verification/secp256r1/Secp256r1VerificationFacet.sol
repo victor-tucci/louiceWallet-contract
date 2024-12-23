@@ -13,7 +13,7 @@ import {IVerificationFacet} from "../../interfacesAccount/IVerificationFacet.sol
 /**
  * @title Secp256r1 verification facet
  * @dev Primarily used to verify user ops signed with passkeys
- * @author Ruslan Serebriakov (@rsrbk)
+ * @author victor tucci (@victor-tucci)
  * @author David Yongjun Kim (@Powerstream3604)
  */
 contract Secp256r1VerificationFacet is IVerificationFacet, IERC1271 {

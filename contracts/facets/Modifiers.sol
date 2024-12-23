@@ -7,7 +7,7 @@ import {IDiamondCut} from "../facets/base/interfaces/IDiamondCut.sol";
 /**
  * @title Modifiers
  * @dev Responsible for providing modifiers/util functions to Facet contracts
- * @author David Yongjun Kim (@Powerstream3604)
+ * @author victor tucci (@victor-tucci)
  */
 abstract contract Modifiers is BarzStorage {
     uint8 constant INNER_STRUCT = 0;

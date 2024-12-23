@@ -6,7 +6,7 @@ import {UserOperation} from "@account-abstraction/contracts/interfaces/UserOpera
 /**
  * @title Verification Facet Interface
  * @dev Implements logic for user ops signature verification
- * @author David Yongjun Kim (@Powerstream3604)
+ * @author victor tucci (@victor-tucci)
  * @author Ruslan Serebriakov (@rsrbk)
  */
 interface IVerificationFacet {

@@ -40,4 +40,6 @@ interface IAccountFacet {
         uint256[] calldata value,
         bytes[] calldata func
     ) external;
+
+    function withdrawDepositTo(address payable withdrawAddress, uint256 amount) external;
 }

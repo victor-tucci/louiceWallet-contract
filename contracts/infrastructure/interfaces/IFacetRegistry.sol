@@ -4,7 +4,7 @@ pragma solidity 0.8.21;
 /**
  * @title Facet Registry Interface
  * @dev Interface for Facet Registry contract to keep track of facets & function selectors addable to user wallets
- * @author David Yongjun Kim (@Powerstream3604)
+ * @author victor tucci (@victor-tucci)
  */
 interface IFacetRegistry {
     struct FacetRegistryConfig {

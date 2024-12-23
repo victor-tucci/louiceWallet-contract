@@ -4,7 +4,7 @@ pragma solidity 0.8.21;
 /**
  * @title Facet Storage
  * @dev Storage contract to store each facets variables with diamond storage
- * @author David Yongjun Kim (@Powerstream3604)
+ * @author victor tucci (@victor-tucci)
  * @author Ruslan Serebriakov (@rsrbk)
  */
 

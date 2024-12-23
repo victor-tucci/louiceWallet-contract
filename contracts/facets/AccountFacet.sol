@@ -206,7 +206,7 @@ contract AccountFacet is IAccountFacet, BarzStorage, BaseAccount {
      * @param withdrawAddress The address to send the withdrawn funds to.
      * @param amount The amount to withdraw (0 to withdraw the full balance).
      */
-    function withdrawDepositTo(address payable withdrawAddress, uint256 amount) public {
+    function withdrawDepositTo(address payable withdrawAddress, uint256 amount) external {
         require(withdrawAddress != address(0), "Invalid withdraw address");
         _requireFromEntryPoint();
 

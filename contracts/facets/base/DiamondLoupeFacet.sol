@@ -17,7 +17,7 @@ import {IDiamondLoupe} from "./interfaces/IDiamondLoupe.sol";
 /**
  * @title DiamondLoupe Facet
  * @dev DiamondLoupe contract compatible with EIP-2535
- * @author David Yongjun Kim (@Powerstream3604)
+ * @author victor tucci (@victor-tucci)
  */
 contract DiamondLoupeFacet is IDiamondLoupe, IStorageLoupe, IERC165 {
     // Diamond Loupe Functions

@@ -9,7 +9,7 @@ import {IERC677Receiver} from "../interfaceMain/ERC/IERC677Receiver.sol";
 /**
  * @title TokenReceiver Facet
  * @dev Contract that enables receiving ERC721/ERC1155/ERC777/ERC677 Tokens with safe transfer
- * @author David Yongjun Kim (@Powerstream3604)
+ * @author victor tucci (@victor-tucci)
  */
 contract TokenReceiverFacet is
     IERC721Receiver,

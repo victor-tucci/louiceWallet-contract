@@ -10,7 +10,7 @@ import {IDiamondCut} from "./interfaces/IDiamondCut.sol";
 /**
  * @title DiamondCut Facet
  * @dev Responsible for adding/removing/replace facets in Barz
- * @author David Yongjun Kim (@Powerstream3604)
+ * @author victor tucci (@victor-tucci)
  */
 contract DiamondCutFacet is Modifiers, IDiamondCut {
     address public owner;
