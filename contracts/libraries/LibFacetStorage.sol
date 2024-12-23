@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
-pragma solidity ^0.8.21;
+pragma solidity 0.8.21;
 
 /**
  * @title Facet Storage
@@ -40,7 +40,7 @@ library LibFacetStorage {
     bytes32 constant R1_STORAGE_POSITION =
         keccak256("v0.louiceWallet.diamond.storage.Secp256r1VerificationStorage");
     bytes32 constant DIAMONDCUT_STORAGE_POSITION =
-        keccak256("v0.trustwallet.diamond.storage.DiamondCutStorage");
+        keccak256("v0.louiceWallet.diamond.storage.DiamondCutStorage");
 
     function r1Storage()
         internal

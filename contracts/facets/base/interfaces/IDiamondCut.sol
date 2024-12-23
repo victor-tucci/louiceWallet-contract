@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
-pragma solidity ^0.8.21;
+pragma solidity 0.8.21;
 
 /**
  * @title DiamondCut Facet Interface
@@ -51,33 +51,6 @@ interface IDiamondCut {
     ) external;
 
     function updateSupportsInterface(bytes4 interfaceId, bool flag) external;
-
-    function diamondCutWithGuardian(
-        FacetCut[] calldata diamondCut,
-        address[] calldata approvers,
-        bytes[] calldata signatures
-    ) external;
-
-    function approveDiamondCut(FacetCut[] calldata diamondCut) external;
-
-    function revokeDiamondCutApproval(FacetCut[] calldata diamondCut) external;
-
-    function getDiamondCutApprovalCountWithTimeValidity(
-        bytes32 diamondCutHash
-    ) external view returns (uint256);
-
-    function getOwnerCutApprovalWithTimeValidity(
-        bytes32 diamondCutHash
-    ) external view returns (bool);
-
-    function isCutApproved(
-        bytes32 diamondCutHash,
-        address approver
-    ) external view returns (bool);
-
-    function getDiamondCutHash(
-        FacetCut[] calldata diamondCut
-    ) external view returns (bytes32);
 
     function getDiamondCutNonce() external view returns (uint128);
 }

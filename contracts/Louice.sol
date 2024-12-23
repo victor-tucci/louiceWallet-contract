@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
-pragma solidity ^0.8.21;
+pragma solidity 0.8.21;
 
 import {LibDiamond} from "./libraries/LibDiamond.sol";
 import {ILouice} from "./interfaceMain/ILouice.sol";
