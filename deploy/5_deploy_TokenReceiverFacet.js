@@ -1,15 +1,12 @@
 const hre = require("hardhat");
 
 async function main() {
-  // Deploy the TokenReceiverFacet contract
-
-  const TokenReceiverFacet = await hre.ethers.deployContract("TokenReceiverFacet");
-  await TokenReceiverFacet.waitForDeployment();
-
-  console.log('==TokenReceiverFacet addr=', TokenReceiverFacet.address)
+  //Deploy TokenReceiverFacet
+  const TokenReceiver = await hre.ethers.deployContract('TokenReceiverFacet');
+  const TokenReceiverFacet = await TokenReceiver.waitForDeployment();
+  console.log('==TokenReceiverFacet addr=', TokenReceiverFacet.target);
 }
 
-// Run the main function and catch any errors
 main().catch((error) => {
   console.error(error);
   process.exit(1);

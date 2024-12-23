@@ -38,7 +38,7 @@ contract DefaultFallbackHandler is IDiamondLoupe {
         bytes4[] memory functionSelectors = new bytes4[](1);
         functionSelectors[0] = IDiamondCut.diamondCut.selector;
 
-        bytes4[] memory accountFunctionSelectors = new bytes4[](5);
+        bytes4[] memory accountFunctionSelectors = new bytes4[](6);
         accountFunctionSelectors[0] = IAccountFacet.execute.selector;
         accountFunctionSelectors[1] = IAccountFacet.executeBatch.selector;
         accountFunctionSelectors[2] = IAccountFacet.withdrawDepositTo.selector;

@@ -1,15 +1,12 @@
 const hre = require("hardhat");
 
 async function main() {
-  // Deploy the AccountFacet contract
-
-  const AccountFacet = await hre.ethers.deployContract("AccountFacet");
-  await AccountFacet.waitForDeployment();
-
-  console.log('==AccountFacet addr=', AccountFacet.address)
+  //Deploy AccountFacet
+  const Account = await hre.ethers.deployContract('AccountFacet');
+  const AccountFacet = await Account.waitForDeployment();
+  console.log('==AccountFacet addr=', AccountFacet.target);
 }
 
-// Run the main function and catch any errors
 main().catch((error) => {
   console.error(error);
   process.exit(1);

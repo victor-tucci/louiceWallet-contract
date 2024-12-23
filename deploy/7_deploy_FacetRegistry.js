@@ -4,11 +4,10 @@ async function main() {
   const [signer] = await hre.ethers.getSigners();
   const address = await signer.getAddress();
   let args = [address];
-
-  //Deploy DiamondCutFacet
-  const DiamondCut = await hre.ethers.deployContract('DiamondCutFacet',args);
-  const DiamondCutFacet = await DiamondCut.waitForDeployment();
-  console.log("==DiamondCutFacet addr= : ", DiamondCutFacet.target);
+  //Deploy FacetRegistry
+  const FacetRegistry = await hre.ethers.deployContract('FacetRegistry',args);
+  const Facetregistry = await FacetRegistry.waitForDeployment();
+  console.log("==FacetRegistry addr= : ", Facetregistry.target);
 }
 
 main().catch((error) => {
