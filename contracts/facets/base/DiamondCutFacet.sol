@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: Apache-2.0
 pragma solidity 0.8.21;
 
+import {Ownable2Step} from "@openzeppelin/contracts/access/Ownable2Step.sol";
 import {LibDiamond} from "../../libraries/LibDiamond.sol";
 import {SignatureChecker} from "@openzeppelin/contracts/utils/cryptography/SignatureChecker.sol";
 import {LibFacetStorage} from "../../libraries/LibFacetStorage.sol";
@@ -12,16 +13,17 @@ import {IDiamondCut} from "./interfaces/IDiamondCut.sol";
  * @dev Responsible for adding/removing/replace facets in Barz
  * @author victor tucci (@victor-tucci)
  */
-contract DiamondCutFacet is Modifiers, IDiamondCut {
-    address public owner;
+contract DiamondCutFacet is Modifiers, IDiamondCut,Ownable2Step {
 
     /**
-     * @notice This constructor sets the Owner address which is an immutable variable.
-     *         Immutable variables do not impact the storage of diamond
+     * @notice Transfers the ownership of the contract to the given owner
+     * @param _owner Address of owner who has access to initialize the default security variables for security manager
      */
-    constructor() {
-        owner = msg.sender;
+    constructor(address _owner) {
+        transferOwnership(_owner);
+        _transferOwnership(_owner);
     }
+
 
     /**
      * @notice Updates the flag for the interfaceId
@@ -31,8 +33,8 @@ contract DiamondCutFacet is Modifiers, IDiamondCut {
     function updateSupportsInterface(
         bytes4 _interfaceId,
         bool _flag
-    ) external override {
-        LibDiamond.enforceIsSelf();
+    ) external override onlyOwner{
+        // LibDiamond.enforceIsSelf();
         LibDiamond.diamondStorage().supportedInterfaces[_interfaceId] = _flag;
         emit SupportsInterfaceUpdated(_interfaceId, _flag);
     }
@@ -47,7 +49,7 @@ contract DiamondCutFacet is Modifiers, IDiamondCut {
         FacetCut[] calldata _diamondCut,
         address _init,
         bytes calldata
-    ) external override {
+    ) external override onlyOwner{
         _checkFacetCutValidity(_diamondCut);
         if (address(0) != _init) revert DiamondCutFacet__InvalidInitAddress();
 

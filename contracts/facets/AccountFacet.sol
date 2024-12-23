@@ -140,7 +140,7 @@ contract AccountFacet is IAccountFacet, BarzStorage, BaseAccount {
         }
     }
 
-        /**
+    /**
      * @notice Validates the signature field of UserOperation
      * @dev This method validates if the signature of UserOp is indeed valid by delegating the call to Verification Facet
      *      Barz makes a call to the pre-registered Verification Facet address in App Storage
