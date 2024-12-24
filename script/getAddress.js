@@ -4,7 +4,7 @@ require("dotenv").config();
 const web3 = new Web3(process.env.RPC_URL); // Replace with your RPC URL
 
 // Private Key (DO NOT expose this in frontend code)
-PRIVATE_KEY="0x4e421dea9953b00e5e0aba4c8eb9061bc9ae4fdb140489dd9e65fe411acb6349"
+PRIVATE_KEY=""
 const account = web3.eth.accounts.privateKeyToAccount(PRIVATE_KEY);
 
 const LouiceFactoryABI = require("../artifacts/contracts/LouiceFactory.sol/LouiceFactory.json"); // Replace with your actual ABI file
@@ -14,7 +14,7 @@ const pubkeyX = "0x3b44499a88d0ea1c5defef4cc45d3b4a27f506cb925aa6f226f14c3939e83
 const pubkeyY = "0xb3b7011cb4c2c367b2b2e1b48e561db345c11ee2572c2c01cbe40c2541ee6cb8";
 const prefix = "0x04";
 const publicKey = prefix + pubkeyX.slice(2) + pubkeyY.slice(2);
-console.log(publicKey);
+// console.log(publicKey);
 
 const SALT = 21;
 
@@ -72,7 +72,7 @@ async function main() {
 
     try {
         const accountFacet = await LouiceFactory.methods.accountFacet().call();
-        console.log("Account Facet Address:", accountFacet);
+        // console.log("Account Facet Address:", accountFacet);
 
         await getAddressFromFactoryContract(LouiceFactory);
         // await callCreateAccount(LouiceFactory);
