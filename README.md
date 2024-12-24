@@ -5,12 +5,11 @@ This project demonstrates a basic Hardhat use case. It comes with a sample contr
 Try running some of the following tasks:
 
 ```shell
-npx hardhat node
-npx hardhat run scripts/deploy.js
-npx hardhat run scripts/execute.js
+npx hardhat compile
+npx hardhat run deploy/[1_*, 2_*, ....]
 ```
 For verify the contracts
 
 ```shell
-npx hardhat verify --network polygon DEPLOYED_CONTRACT_ADDRESS "constructorArg1" "constructorArg2"
+npx hardhat verify --network amoy DEPLOYED_CONTRACT_ADDRESS "constructorArg1" "constructorArg2"
 ```
