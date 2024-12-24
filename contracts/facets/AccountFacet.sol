@@ -69,6 +69,8 @@ contract AccountFacet is IAccountFacet, BarzStorage, BaseAccount {
             _defaultFallBackHandler
         );
 
+        _cutDiamondAccountFacet(_verificationFacet);
+
         bytes memory initCall = abi.encodeWithSignature(
             "initializeSigner(bytes)",
             _ownerPublicKey
