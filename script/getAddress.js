@@ -4,7 +4,7 @@ require("dotenv").config();
 const web3 = new Web3(process.env.RPC_URL); // Replace with your RPC URL
 
 // Private Key (DO NOT expose this in frontend code)
-PRIVATE_KEY=""
+PRIVATE_KEY="0x" + process.env.PRIVATE_KEY
 const account = web3.eth.accounts.privateKeyToAccount(PRIVATE_KEY);
 
 const LouiceFactoryABI = require("../artifacts/contracts/LouiceFactory.sol/LouiceFactory.json"); // Replace with your actual ABI file
@@ -53,7 +53,7 @@ const callCreateAccount = async (LouiceFactory) => {
         console.log({tx});
 
         // Sign the transaction
-        const signedTx = await web3.eth.accounts.signTransaction(tx, PRIVATE_KEY);
+        const signedTx = await web3.eth.accounts.signTransaction(tx, PRIVATEKEY);
 
         // Send the transaction
         const receipt = await web3.eth.sendSignedTransaction(signedTx.rawTransaction);
@@ -65,10 +65,9 @@ const callCreateAccount = async (LouiceFactory) => {
 }
 
 async function main() {
-    const LOUICE_FACTORY_ADDRESS = process.env.LOUICE_FACTORY;
 
     // Get the contract instance
-    const LouiceFactory = new web3.eth.Contract(LouiceFactoryABI.abi, LOUICE_FACTORY_ADDRESS);
+    const LouiceFactory = new web3.eth.Contract(LouiceFactoryABI.abi, process.env.LOUICE_FACTORY);
 
     try {
         const accountFacet = await LouiceFactory.methods.accountFacet().call();

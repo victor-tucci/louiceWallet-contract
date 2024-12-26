@@ -17,17 +17,17 @@ function getSelectors(functionSignature) {
         selectors.push(ethers.id(func).slice(0, 10));
     return selectors;
 }
-const functionSignature = ["retrieve()", "store(uint256)"]
+const functionSignature = ["retrieve()"]
 const functionSelector = getSelectors(functionSignature);
 
 console.log(`Function Selector:` ,functionSelector);
 
-const addFacet = async () => {
+const removeFacet = async () => {
     try {
 
         const cut = [{
-            facetAddress: '0x1Dd5bE88733Fb38bA0DF277CeD962929665af93d',
-            action: FacetCutAction.Add,
+            facetAddress: process.env.ZERO_ADDRESS,
+            action: FacetCutAction.Remove,
             functionSelectors: functionSelector
         }]
         console.log(cut);
@@ -50,5 +50,5 @@ const getOwner = async () => {
     }
 }
 
-addFacet();
+removeFacet();
 // getOwner();

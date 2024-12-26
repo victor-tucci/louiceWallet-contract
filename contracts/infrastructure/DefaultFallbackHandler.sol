@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: Apache-2.0
 pragma solidity 0.8.21;
 
+import {Ownable2Step} from "@openzeppelin/contracts/access/Ownable2Step.sol";
 import {IERC721Receiver} from "@openzeppelin/contracts/token/ERC721/IERC721Receiver.sol";
 import {IERC1155Receiver} from "@openzeppelin/contracts/token/ERC1155/IERC1155Receiver.sol";
 import {IERC777Recipient} from "@openzeppelin/contracts/token/ERC777/IERC777Recipient.sol";
@@ -18,22 +19,25 @@ import {IERC165} from "../interfaceMain/ERC/IERC165.sol";
  * @dev A default fallback handler for Barz
  * @author David Yongjun Kim (@Powerstream3604)
  */
-contract DefaultFallbackHandler is IDiamondLoupe {
+contract DefaultFallbackHandler is IDiamondLoupe, Ownable2Step {
     /**
      * @notice Sets the middleware diamond for Barz wallet as a fallback handler
      * @dev This contract is also a diamond that holds the default facets to reduce gas cost for wallet activation.
      *      Within the constructor this conducts diamond cut to initially setup the diamond. This is a non-upgradeable contract
+     * @param _owner Address of owner who has access to handle the facets
      * @param _diamondCutFacet Address if diamond cut facet
      * @param _accountFacet Address account facet
      * @param _tokenReceiverFacet Address of token receiver facet
      * @param _diamondLoupeFacet Address of diamond loupe facet
      */
     constructor(
+        address _owner,
         address _diamondCutFacet,
         address _accountFacet,
         address _tokenReceiverFacet,
         address _diamondLoupeFacet
     ) payable {
+        handleOwner(_owner);
         IDiamondCut.FacetCut[] memory cut = new IDiamondCut.FacetCut[](4);
         bytes4[] memory functionSelectors = new bytes4[](1);
         functionSelectors[0] = IDiamondCut.diamondCut.selector;
@@ -88,6 +92,31 @@ contract DefaultFallbackHandler is IDiamondLoupe {
 
             DefaultLibDiamond.diamondCut(cut, address(0), "");
         }
+    }
+
+    /**
+     * @notice Transfers the ownership of the contract to the given owner
+     * @param _owner Address of owner who has access to handle the facets
+     */
+    function handleOwner(address _owner) internal {
+        transferOwnership(_owner);
+        _transferOwnership(_owner);
+    }
+
+    /**
+     * @notice Add/replace/remove any number of functions and optionally execute
+     *         a function with delegatecall when guardians don't exist
+     * @param _diamondCut Contains the facet addresses and function selectors
+     * @param _init The address of the contract or facet to execute _calldata. It's prohibited in Louice
+     */
+    function diamondCut(
+        IDiamondCut.FacetCut[] calldata _diamondCut,
+        address _init,
+        bytes calldata
+    ) external onlyOwner{
+        if (address(0) != _init) revert IDiamondCut.DiamondCutFacet__InvalidInitAddress();
+        
+        DefaultLibDiamond.diamondCut(_diamondCut, address(0), "");
     }
 
     /**

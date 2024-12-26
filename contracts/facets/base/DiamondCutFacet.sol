@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: Apache-2.0
 pragma solidity 0.8.21;
 
-import {Ownable2Step} from "@openzeppelin/contracts/access/Ownable2Step.sol";
 import {LibDiamond} from "../../libraries/LibDiamond.sol";
 import {SignatureChecker} from "@openzeppelin/contracts/utils/cryptography/SignatureChecker.sol";
 import {LibFacetStorage} from "../../libraries/LibFacetStorage.sol";
@@ -10,20 +9,10 @@ import {IDiamondCut} from "./interfaces/IDiamondCut.sol";
 
 /**
  * @title DiamondCut Facet
- * @dev Responsible for adding/removing/replace facets in Barz
+ * @dev Responsible for adding/removing/replace facets in Louice
  * @author victor tucci (@victor-tucci)
  */
-contract DiamondCutFacet is Modifiers, IDiamondCut,Ownable2Step {
-
-    /**
-     * @notice Transfers the ownership of the contract to the given owner
-     * @param _owner Address of owner who has access to initialize the default security variables for security manager
-     */
-    constructor(address _owner) {
-        transferOwnership(_owner);
-        _transferOwnership(_owner);
-    }
-
+contract DiamondCutFacet is Modifiers, IDiamondCut {
 
     /**
      * @notice Updates the flag for the interfaceId
@@ -33,8 +22,8 @@ contract DiamondCutFacet is Modifiers, IDiamondCut,Ownable2Step {
     function updateSupportsInterface(
         bytes4 _interfaceId,
         bool _flag
-    ) external override onlyOwner{
-        // LibDiamond.enforceIsSelf();
+    ) external override {
+        LibDiamond.enforceIsSelf();
         LibDiamond.diamondStorage().supportedInterfaces[_interfaceId] = _flag;
         emit SupportsInterfaceUpdated(_interfaceId, _flag);
     }
@@ -43,13 +32,14 @@ contract DiamondCutFacet is Modifiers, IDiamondCut,Ownable2Step {
      * @notice Add/replace/remove any number of functions and optionally execute
      *         a function with delegatecall when guardians don't exist
      * @param _diamondCut Contains the facet addresses and function selectors
-     * @param _init The address of the contract or facet to execute _calldata. It's prohibited in Barz
+     * @param _init The address of the contract or facet to execute _calldata. It's prohibited in Louice
      */
     function diamondCut(
         FacetCut[] calldata _diamondCut,
         address _init,
         bytes calldata
-    ) external override onlyOwner{
+    ) external override {
+        LibDiamond.enforceIsSelf();
         _checkFacetCutValidity(_diamondCut);
         if (address(0) != _init) revert DiamondCutFacet__InvalidInitAddress();
 

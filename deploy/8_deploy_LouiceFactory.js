@@ -6,6 +6,7 @@ async function main() {
   const facetRegistry = process.env.FACET_REGISTRY
   const defaultFallbackHandler = process.env.DEFAULT_FALLBACK_HANDLER
   const args = [accountFacet,entrypoint,facetRegistry,defaultFallbackHandler];
+  console.log({args});
 
   //Deploy LouiceFactory
   const Louice = await hre.ethers.deployContract("LouiceFactory", args);
