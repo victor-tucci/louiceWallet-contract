@@ -173,6 +173,30 @@ contract Secp256r1VerificationFacet is IVerificationFacet, IERC1271 {
         bytes32 clientHash;
         {
             string memory opHashBase64 = Base64.encode(bytes.concat(_hash));
+            bytes memory strBytes = bytes(opHashBase64);
+            bytes memory tempResult = new bytes(strBytes.length);
+            uint256 resultLength = 0;
+
+            for (uint256 i = 0; i < strBytes.length; i++) {
+                if (strBytes[i] == "+") {
+                    tempResult[resultLength] = "-";
+                } else if (strBytes[i] == "/") {
+                    tempResult[resultLength] = "_";
+                } else if (strBytes[i] == "=") {
+                    continue; // Skip `=`, effectively removing it
+                } else {
+                    tempResult[resultLength] = strBytes[i];
+                }
+                resultLength++;
+            }
+
+            // Create the final result with the exact length
+            bytes memory finalResult = new bytes(resultLength);
+            for (uint256 j = 0; j < resultLength; j++) {
+                finalResult[j] = tempResult[j];
+            }
+            opHashBase64 = string(finalResult);
+            
             string memory clientDataJSON = string.concat(
                 clientDataJSONPre,
                 opHashBase64,
