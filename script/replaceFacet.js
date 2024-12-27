@@ -22,12 +22,12 @@ const functionSelector = getSelectors(functionSignature);
 
 console.log(`Function Selector:` ,functionSelector);
 
-const addFacet = async () => {
+const replaceFacet = async () => {
     try {
 
         const cut = [{
-            facetAddress: '0xDA5d07C004FAe33C990dD8bd6bDb5DC966eec8aB',
-            action: FacetCutAction.Add,
+            facetAddress: "0x1Dd5bE88733Fb38bA0DF277CeD962929665af93d",
+            action: FacetCutAction.Replace,
             functionSelectors: functionSelector
         }]
         console.log(cut);
@@ -50,5 +50,5 @@ const getOwner = async () => {
     }
 }
 
-addFacet();
+replaceFacet();
 // getOwner();
