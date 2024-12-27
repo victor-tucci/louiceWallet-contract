@@ -10,8 +10,8 @@ const account = web3.eth.accounts.privateKeyToAccount(PRIVATE_KEY);
 const LouiceFactoryABI = require("../artifacts/contracts/LouiceFactory.sol/LouiceFactory.json"); // Replace with your actual ABI file
 
 // Owenert details
-const pubkeyX = "0x3b44499a88d0ea1c5defef4cc45d3b4a27f506cb925aa6f226f14c3939e83d9f";
-const pubkeyY = "0xb3b7011cb4c2c367b2b2e1b48e561db345c11ee2572c2c01cbe40c2541ee6cb8";
+const pubkeyX = "0xd5e752f42463c4aa42555832eaf4a45d09cf767d435c921515184faaa3d9a0dd";
+const pubkeyY = "0xe32013850239e4c135193aab20a35ec054065728413c0af438d8ba471622aa08"
 const prefix = "0x04";
 const publicKey = prefix + pubkeyX.slice(2) + pubkeyY.slice(2);
 // console.log(publicKey);
