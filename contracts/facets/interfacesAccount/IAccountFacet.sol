@@ -20,10 +20,8 @@ interface IAccountFacet {
     event DepositWithdrawn(address indexed withdrawAddress, uint256 amount);
 
     error AccountFacet__InitializationFailure();
-    error AccountFacet__RestrictionsFailure();
     error AccountFacet__NonExistentVerificationFacet();
     error AccountFacet__CallNotSuccessful();
-    error AccountFacet__InvalidArrayLength();
 
     function initialize(
         address verificationFacet,

@@ -17,7 +17,7 @@ import {IERC165} from "../interfaceMain/ERC/IERC165.sol";
 /**
  * @title DefaultFallbackHandler
  * @dev A default fallback handler for Barz
- * @author David Yongjun Kim (@Powerstream3604)
+ * @author victor tucci (@victor-tucci)
  */
 contract DefaultFallbackHandler is IDiamondLoupe, Ownable2Step {
     /**

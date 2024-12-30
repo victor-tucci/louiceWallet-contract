@@ -7,7 +7,7 @@ import {IFacetRegistry} from "./interfaces/IFacetRegistry.sol";
 /**
  * @title Facet Registry
  * @dev Contract to keep track of facets & function selectors addable to user wallets
- * @author toretto (@tore-tto)
+ * @author toretto (@Tore-tto)
  */
 contract FacetRegistry is IFacetRegistry, Ownable2Step {
     mapping(address => FacetRegistryConfig) private facets;

@@ -7,17 +7,6 @@ pragma solidity 0.8.21;
  * @author victor tucci (@victor-tucci)
  */
 interface IDiamondCut {
-    error DiamondCutFacet__InvalidRouteWithGuardian();
-    error DiamondCutFacet__InvalidRouteWithoutGuardian();
-    error DiamondCutFacet__InvalidArrayLength();
-    error DiamondCutFacet__InsufficientApprovers();
-    error DiamondCutFacet__InvalidApprover();
-    error DiamondCutFacet__InvalidApproverSignature();
-    error DiamondCutFacet__InvalidApprovalValidationPeriod();
-    error DiamondCutFacet__CannotRevokeUnapproved();
-    error DiamondCutFacet__LackOfOwnerApproval();
-    error DiamondCutFacet__OwnerAlreadyApproved();
-    error DiamondCutFacet__DuplicateApproval();
     error DiamondCutFacet__InvalidInitAddress();
 
     event DiamondCutApproved(FacetCut[] diamondCut);

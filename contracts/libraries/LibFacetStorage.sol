@@ -5,7 +5,7 @@ pragma solidity 0.8.21;
  * @title Facet Storage
  * @dev Storage contract to store each facets variables with diamond storage
  * @author victor tucci (@victor-tucci)
- * @author Ruslan Serebriakov (@rsrbk)
+ * @author toretto (@Tore-tto)
  */
 
 struct Secp256r1VerificationStorage {

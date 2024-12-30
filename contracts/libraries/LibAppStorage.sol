@@ -26,9 +26,7 @@ struct AppStorage {
 }
 
 library LibAppStorage {
-    error LibAppStorage__AccountAlreadyUninitialized();
     error LibAppStorage__AccountMustBeUninitialized();
-    error LibAppStorage__SignerAlreadyUninitialized();
     error LibAppStorage__SignerMustBeUninitialized();
 
     function appStorage() internal pure returns (AppStorage storage ds) {

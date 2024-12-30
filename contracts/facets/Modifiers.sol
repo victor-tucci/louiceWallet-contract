@@ -12,8 +12,6 @@ import {IDiamondCut} from "../facets/base/interfaces/IDiamondCut.sol";
 abstract contract Modifiers is BarzStorage {
     uint8 constant INNER_STRUCT = 0;
 
-    error CallerNotGuardian();
-    error CallerNotGuardianOrOwner();
     error DuplicateApprover();
     error ZeroApproverLength();
     error UnregisteredFacetAndSelectors();
