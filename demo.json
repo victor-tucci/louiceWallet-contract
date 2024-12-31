@@ -1,28 +1,5 @@
-{	"abi": [
-    {
-        "inputs": [
-            {
-                "internalType": "string",
-                "name": "_name",
-                "type": "string"
-            }
-        ],
-        "stateMutability": "nonpayable",
-        "type": "constructor"
-    },
-    {
-        "inputs": [],
-        "name": "name",
-        "outputs": [
-            {
-                "internalType": "string",
-                "name": "",
-                "type": "string"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
+{
+    "abi": [
     {
         "inputs": [],
         "name": "retrieve",
@@ -49,4 +26,5 @@
         "stateMutability": "nonpayable",
         "type": "function"
     }
-]}
+    ]
+}

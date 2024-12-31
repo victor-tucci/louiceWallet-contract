@@ -17,7 +17,7 @@ function getSelectors(functionSignature) {
         selectors.push(ethers.id(func).slice(0, 10));
     return selectors;
 }
-const functionSignature = ["retrieve()"]
+const functionSignature = ["execute(address,uint256,bytes,address,bytes)"]
 const functionSelector = getSelectors(functionSignature);
 
 console.log(`Function Selector:` ,functionSelector);
@@ -26,7 +26,7 @@ const replaceFacet = async () => {
     try {
 
         const cut = [{
-            facetAddress: "0x1Dd5bE88733Fb38bA0DF277CeD962929665af93d",
+            facetAddress: "0x857c55f5eEa76457e918941D2D3E16eb5885Ba60",
             action: FacetCutAction.Replace,
             functionSelectors: functionSelector
         }]

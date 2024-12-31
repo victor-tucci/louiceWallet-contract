@@ -3,10 +3,12 @@ const axios = require("axios");
 const fs = require('fs');
 require("dotenv").config();
 
-//new-passkey
 const ERC20_contract = "0xF757Dd3123b69795d43cB6b58556b3c6786eAc13"
+const PAYMASTER_ADDRESS = "0xDd74396fb58c32247d8E2410e853a73f71053252"; // louicepaymaster
+
 const second_address = "0xA69B64b4663ea5025549E8d7B90f167D6F0610B3"
 
+//new-passkey
 const SALT = 21;
 const pubkeyX = "0x9f90a728802f31de6927158de26fafdd1354c47514796dd818003ce5604f5375";
 const pubkeyY = "0x5f5a18fdc6576aaeec2cd1f4d9056f2f12cbcdd1580a4e894b636b7b020c6d4b";
@@ -68,14 +70,19 @@ async function main() {
     const value = ethers.parseEther('0.003');
     console.log("initcode length:", initCode.length);
 
+    //construct for the approve
+    const dummyActualGasNeed = ethers.parseEther('1');
+    const dummyTokenApprove = IERC20Interface.encodeFunctionData("approve", [PAYMASTER_ADDRESS, dummyActualGasNeed]);
+    console.log({dummyTokenApprove});
+
     const userOp = {
         sender,
         nonce: "0x" + (await EPoint.getNonce(sender, 0)).toString(16),
         initCode,
-        // callData: Account.interface.encodeFunctionData("execute",[ERC20_contract, 0, ERC20data, "0x0000000000000000000000000000000000000000", "0x"]),
-        // callData:Account.interface.encodeFunctionData("execute",[ERC20_contract, 0, ERC20data, ERC20_contract, dummyTokenApprove]),
-        callData: AccountFacet.interface.encodeFunctionData("execute", [second_address, value, "0x", "0x0000000000000000000000000000000000000000", "0x"]),
-        // paymasterAndData: PAYMASTER_ADDRESS + "F756Dd3123b69795d43cB6b58556b3c6786eAc13010000671a219600000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000013b5e557e4601a264c654f3f0235ed381fc08b5ffea980e403bc807e27433586b0eb1abe122723125fc4d62ef605943f53a0c87893af3cfd6d33c3924cb0a4328ab0da981c", // we're not using a paymaster, for now
+        // callData: AccountFacet.interface.encodeFunctionData("execute",[ERC20_contract, 0, ERC20data, "0x0000000000000000000000000000000000000000", "0x"]),
+        callData:AccountFacet.interface.encodeFunctionData("execute",[second_address, value, "0x", ERC20_contract, dummyTokenApprove]),
+        // callData: AccountFacet.interface.encodeFunctionData("execute", [second_address, value, "0x", "0x0000000000000000000000000000000000000000", "0x"]),
+        paymasterAndData: PAYMASTER_ADDRESS + "F756Dd3123b69795d43cB6b58556b3c6786eAc13010000671a219600000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000013b5e557e4601a264c654f3f0235ed381fc08b5ffea980e403bc807e27433586b0eb1abe122723125fc4d62ef605943f53a0c87893af3cfd6d33c3924cb0a4328ab0da981c", // we're not using a paymaster, for now
         paymasterAndData: "0x",
         signature: "0x643b8c4c46aaaf54fce00b774621525d0ea6402f8a4d344c2d2fc196b32b26098cbfccc3d902a21f601349d5956c34b02d3845d101edaea23c6080ec0287ea2300000000000000000000000000000000000000000000000000000000000000a000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000000000000160000000000000000000000000000000000000000000000000000000000000002549960de5880e8c687434170f6476605b8fe4aeb9a28632c7995cf3ba831d97631d0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000247b2274797065223a22776562617574686e2e676574222c226368616c6c656e6765223a22000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000037222c226f726967696e223a22687474703a2f2f6c6f63616c686f73743a35313733222c2263726f73734f726967696e223a66616c73657d000000000000000000", // we're not validating a signature, for now
     }
@@ -94,9 +101,10 @@ async function main() {
     var { maxFeePerGas } = await ethers.provider.getFeeData();
     userOp.maxFeePerGas = "0x" + maxFeePerGas.toString(16);
 
-    const { maxPriorityFeePerGas } = await ethers.provider.send(
+    const maxPriorityFeePerGas = await ethers.provider.send(
         "skandha_getGasPrice"
     );
+    console.log("skandha gas price:",maxPriorityFeePerGas);
     userOp.maxPriorityFeePerGas = userOp.maxFeePerGas;
 
     const userOpHash = await EPoint.getUserOpHash(userOp);
