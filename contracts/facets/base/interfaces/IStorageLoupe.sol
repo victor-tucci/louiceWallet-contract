@@ -5,7 +5,7 @@ import {IDiamondLoupe} from "./IDiamondLoupe.sol";
 
 /**
  * @title LoupeFromStorage Interface
- * @dev Interface contract to function as a loupe facet directly attached to diamond storage of Barz
+ * @dev Interface contract to function as a loupe facet directly attached to diamond storage of SafeHodl
  * @author victor tucci (@victor-tucci)
  */
 interface IStorageLoupe {

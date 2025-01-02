@@ -38,9 +38,9 @@ struct DiamondCutStorage {
 
 library LibFacetStorage {
     bytes32 constant R1_STORAGE_POSITION =
-        keccak256("v0.louiceWallet.diamond.storage.Secp256r1VerificationStorage");
+        keccak256("v0.safeHodlWallet.diamond.storage.Secp256r1VerificationStorage");
     bytes32 constant DIAMONDCUT_STORAGE_POSITION =
-        keccak256("v0.louiceWallet.diamond.storage.DiamondCutStorage");
+        keccak256("v0.safeHodlWallet.diamond.storage.DiamondCutStorage");
 
     function r1Storage()
         internal

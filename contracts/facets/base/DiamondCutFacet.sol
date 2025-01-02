@@ -9,7 +9,7 @@ import {IDiamondCut} from "./interfaces/IDiamondCut.sol";
 
 /**
  * @title DiamondCut Facet
- * @dev Responsible for adding/removing/replace facets in Louice
+ * @dev Responsible for adding/removing/replace facets in SafeHodl
  * @author victor tucci (@victor-tucci)
  */
 contract DiamondCutFacet is Modifiers, IDiamondCut {
@@ -32,7 +32,7 @@ contract DiamondCutFacet is Modifiers, IDiamondCut {
      * @notice Add/replace/remove any number of functions and optionally execute
      *         a function with delegatecall when guardians don't exist
      * @param _diamondCut Contains the facet addresses and function selectors
-     * @param _init The address of the contract or facet to execute _calldata. It's prohibited in Louice
+     * @param _init The address of the contract or facet to execute _calldata. It's prohibited in SafeHodl
      */
     function diamondCut(
         FacetCut[] calldata _diamondCut,

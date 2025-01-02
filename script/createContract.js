@@ -1,17 +1,17 @@
 const { ethers } = require("ethers");
 require("dotenv").config();
 
-const LouiceFactoryABI = require("../artifacts/contracts/LouiceFactory.sol/LouiceFactory.json"); // Replace with your actual ABI file
+const SafeHodlFactoryABI = require("../artifacts/contracts/SafeHodlFactory.sol/SafeHodlFactory.json"); // Replace with your actual ABI file
 
 // Alchemy or Infura provider
 const provider = new ethers.JsonRpcProvider(process.env.RPC_URL);
 const wallet = new ethers.Wallet(process.env.PRIVATE_KEY, provider);
 
-const louiceFactoryContract = new ethers.Contract(process.env.LOUICE_FACTORY, LouiceFactoryABI.abi, wallet);
+const safeHodlFactoryContract = new ethers.Contract(process.env.SAFEHODL_FACTORY, SafeHodlFactoryABI.abi, wallet);
 
 const callCreateAccount = async (verificationFacet, owner, salt) => {
     try {
-        const tx = await louiceFactoryContract.createAccount(verificationFacet, owner, salt);
+        const tx = await safeHodlFactoryContract.createAccount(verificationFacet, owner, salt);
         const receipt = await tx.wait();
         console.log("Transaction successful:", receipt);
     } catch (error) {

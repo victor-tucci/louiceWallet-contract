@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: GPL-3.0
 pragma solidity ^0.8.12;
 
-/// @author louice Team
+/// @author safeHodl Team
 
 import "@account-abstraction/contracts/core/BasePaymaster.sol";
 import "@account-abstraction/contracts/interfaces/IEntryPoint.sol";
@@ -13,11 +13,11 @@ import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 import { Math } from "@openzeppelin/contracts/utils/math/Math.sol";
 
 /**
- * @title LouicePaymaster
+ * @title SafeHodlPaymaster
  * @dev The Paymaster sponsors the transaction and deducts an equivalent amount of tokens from the sender's account.
  * @author victor tucci (@victor-tucci)
  */
-contract LouicePaymaster is BasePaymaster {
+contract SafeHodlPaymaster is BasePaymaster {
 
     using ECDSA for bytes32;
     using UserOperationLib for UserOperation;

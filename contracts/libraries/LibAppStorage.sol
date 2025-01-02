@@ -7,7 +7,7 @@ import {IFacetRegistry} from "../infrastructure/interfaces/IFacetRegistry.sol";
 
 /*
  * @title App Storage
- * @dev App storage for Barz contract to prevent storage collision
+ * @dev App storage for SafeHodl contract to prevent storage collision
  * @author victor tucci (@victor-tucci)
  */
 
@@ -68,6 +68,6 @@ library LibAppStorage {
 
 }
 
-contract BarzStorage {
+contract SafeHodlStorage {
     AppStorage internal s;
 }

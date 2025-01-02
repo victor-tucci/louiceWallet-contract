@@ -3,7 +3,7 @@ pragma solidity 0.8.21;
 
 /**
  * @title DiamondCut Facet Interface
- * @dev Interface for DiamondCut Facet responsible for adding/removing/replace facets in Barz
+ * @dev Interface for DiamondCut Facet responsible for adding/removing/replace facets in SafeHodl
  * @author victor tucci (@victor-tucci)
  */
 interface IDiamondCut {

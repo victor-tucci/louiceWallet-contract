@@ -1,21 +1,21 @@
 // SPDX-License-Identifier: Apache-2.0
 pragma solidity 0.8.21;
 
-import {Louice} from "../Louice.sol";
+import {SafeHodl} from "../SafeHodl.sol";
 
 /**
- * @title Louice Factory Interface
- * @dev Interface of contract to easily deploy Louice to a pre-computed address with a single call
+ * @title SafeHodl Factory Interface
+ * @dev Interface of contract to easily deploy SafeHodl to a pre-computed address with a single call
  * @author victor tucci (@victor-tucci)
  */
-interface ILouiceFactory {
-    event LouiceDeployed(address);
+interface ISafeHodlFactory {
+    event SafeHodlDeployed(address);
 
     function createAccount(
         address verificationFacet,
         bytes calldata owner,
         uint256 salt
-    ) external returns (Louice);
+    ) external returns (SafeHodl);
 
     function getAddress(
         address verificationFacet,

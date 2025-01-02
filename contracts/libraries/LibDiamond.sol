@@ -11,7 +11,7 @@ error InitializationFunctionReverted(
 
 library LibDiamond {
     bytes32 constant DIAMOND_STORAGE_POSITION =
-        keccak256("louiceWallet.diamond.storage");
+        keccak256("safeHodlWallet.diamond.storage");
 
     struct DiamondStorage {
         // maps function selectors to the facets that execute the functions.
@@ -26,7 +26,7 @@ library LibDiamond {
         // Used to query if a contract implements an interface.
         // Used to implement ERC-165.
         mapping(bytes4 => bool) supportedInterfaces;
-        // Default Fallback Handler of the barz.
+        // Default Fallback Handler of the safeHodl.
         IDiamondLoupe defaultFallbackHandler;
     }
 

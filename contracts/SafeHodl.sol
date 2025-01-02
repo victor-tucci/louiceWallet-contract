@@ -2,21 +2,21 @@
 pragma solidity 0.8.21;
 
 import {LibDiamond} from "./libraries/LibDiamond.sol";
-import {ILouice} from "./interfaceMain/ILouice.sol";
+import {ISafeHodl} from "./interfaceMain/ISafeHodl.sol";
 
 /**
- * @title Louice
+ * @title SafeHodl
  * @dev A diamond proxy wallet with a modular & upgradeable architecture
  * @author victor tucci (@victor-tucci)
  */
-contract Louice is ILouice {
+contract SafeHodl is ISafeHodl {
     /**
-     * @notice Initializes Louice with the given parameters. Louice account is intended to be created from Louice Factory for stable deployment.
+     * @notice Initializes SafeHodl with the given parameters. SafeHodl account is intended to be created from SafeHodl Factory for stable deployment.
      * @dev This method makes a delegate call to account facet and account facet handles the initialization.
-     *      With modular architecture, Louice encompasses wide spectrum of architecture and logic.
+     *      With modular architecture, SafeHodl encompasses wide spectrum of architecture and logic.
      *      The only requirement is account facet to comply with initialize() interface.
-     *      Louice doesn't include built-in functions and is a full proxy, for maximum extensibility and modularity.
-     * @param _accountFacet Address of Account Facet in charge of the Louice initialization
+     *      SafeHodl doesn't include built-in functions and is a full proxy, for maximum extensibility and modularity.
+     * @param _accountFacet Address of Account Facet in charge of the SafeHodl initialization
      * @param _verificationFacet Address of Verification Facet for verifying the signature. Could be any signature scheme
      * @param _entryPoint Address of Entry Point contract
      * @param _facetRegistry Address of Facet Registry. Facet Registry is a registry holding trusted facets that could be added to user's wallet
@@ -43,12 +43,12 @@ contract Louice is ILouice {
             initCall
         );
         if (!success || uint256(bytes32(result)) != 1) {
-            revert Louice__InitializationFailure();
+            revert SafeHodl__InitializationFailure();
         }
     }
 
     /**
-     * @notice Fallback function for Louice complying with Diamond Standard with customization of adding Default Fallback Handler
+     * @notice Fallback function for SafeHodl complying with Diamond Standard with customization of adding Default Fallback Handler
      * @dev Find facet for function that is called and execute the function if a facet is found and return any value.
      */
     fallback() external payable {
@@ -62,7 +62,7 @@ contract Louice is ILouice {
         address facet = address(bytes20(ds.facets[msg.sig]));
         if (facet == address(0))
             facet = ds.defaultFallbackHandler.facetAddress(msg.sig);
-        require(facet != address(0), "Louice: Function does not exist");
+        require(facet != address(0), "SafeHodl: Function does not exist");
         // Execute external function from facet using delegatecall and return any value.
         assembly {
             // copy function selector and any arguments

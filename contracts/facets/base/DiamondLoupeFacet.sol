@@ -26,8 +26,8 @@ contract DiamondLoupeFacet is IDiamondLoupe, IStorageLoupe, IERC165 {
 
     /**
      * @notice Gets all facets and their selectors.
-     * @dev Barz uses a special architecture called default fallback handler. Default Fallback handler is used as a middleware
-     *      that holds the mapping of facet function selector and facet address that Barz uses. This helps Barz to reduce
+     * @dev SafeHodl uses a special architecture called default fallback handler. Default Fallback handler is used as a middleware
+     *      that holds the mapping of facet function selector and facet address that SafeHodl uses. This helps SafeHodl to reduce
      *      significant amount of gas during the initialization process.
      *      Hence, this method aggregates both the facet information from DefaulFallbackHandler and in diamond storage and shows the data to users.
      * @return facets_ Facet
@@ -176,7 +176,7 @@ contract DiamondLoupeFacet is IDiamondLoupe, IStorageLoupe, IERC165 {
     }
 
     /**
-     * @notice Get all the facet addresses used by Barz.
+     * @notice Get all the facet addresses used by SafeHodl.
      * @return facetAddresses_
      */
     function facetAddresses()

@@ -8,10 +8,10 @@ async function main() {
   const args = [accountFacet,entrypoint,facetRegistry,defaultFallbackHandler];
   console.log({args});
 
-  //Deploy LouiceFactory
-  const Louice = await hre.ethers.deployContract("LouiceFactory", args);
-  const LouiceFactory = await Louice.waitForDeployment();
-  console.log("==LouiceFactory addr= : ", LouiceFactory.target);
+  //Deploy SafeHodlFactory
+  const SafeHodl = await hre.ethers.deployContract("SafeHodlFactory", args);
+  const SafeHodlFactory = await SafeHodl.waitForDeployment();
+  console.log("==SafeHodlFactory addr= : ", SafeHodlFactory.target);
 }
 
 main().catch((error) => {

@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: Apache-2.0
 pragma solidity 0.8.21;
 
-import {BarzStorage} from "../libraries/LibAppStorage.sol";
+import {SafeHodlStorage} from "../libraries/LibAppStorage.sol";
 import {IDiamondCut} from "../facets/base/interfaces/IDiamondCut.sol";
 
 /**
@@ -9,7 +9,7 @@ import {IDiamondCut} from "../facets/base/interfaces/IDiamondCut.sol";
  * @dev Responsible for providing modifiers/util functions to Facet contracts
  * @author victor tucci (@victor-tucci)
  */
-abstract contract Modifiers is BarzStorage {
+abstract contract Modifiers is SafeHodlStorage {
     uint8 constant INNER_STRUCT = 0;
 
     error DuplicateApprover();

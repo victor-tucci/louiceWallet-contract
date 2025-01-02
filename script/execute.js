@@ -4,7 +4,7 @@ const fs = require('fs');
 require("dotenv").config();
 
 const ERC20_contract = "0xF757Dd3123b69795d43cB6b58556b3c6786eAc13"
-const PAYMASTER_ADDRESS = "0xDd74396fb58c32247d8E2410e853a73f71053252"; // louicepaymaster
+const PAYMASTER_ADDRESS = "0xDd74396fb58c32247d8E2410e853a73f71053252"; // safeHodlpaymaster
 
 const second_address = "0xA69B64b4663ea5025549E8d7B90f167D6F0610B3"
 
@@ -33,17 +33,17 @@ async function main() {
     // Get the EntryPoint contract
     const EPoint = await hre.ethers.getContractAt("IEntryPoint", process.env.ENTRYPOINT);
     
-    // Get the LouiceFactory contract
-    const LouiceFactoryContract = await hre.ethers.getContractAt("LouiceFactory", process.env.LOUICE_FACTORY);
+    // Get the SafeHodlFactory contract
+    const SafeHodlFactoryContract = await hre.ethers.getContractAt("SafeHodlFactory", process.env.SAFEHODL_FACTORY);
 
     // Use the function from the AccountFacet
     const AccountFacet = await hre.ethers.getContractFactory("AccountFacet");
 
-    // Use the function from the LouiceFactory
-    const LouiceFactory = await hre.ethers.getContractFactory("LouiceFactory");
+    // Use the function from the SafeHodlFactory
+    const SafeHodlFactory = await hre.ethers.getContractFactory("SafeHodlFactory");
 
     // Create Init Code
-    var initCode = process.env.LOUICE_FACTORY + LouiceFactory.interface.encodeFunctionData("createAccount", [
+    var initCode = process.env.SAFEHODL_FACTORY + SafeHodlFactory.interface.encodeFunctionData("createAccount", [
         process.env.SECP256R1_VERIFIER,
         publicKey,
         SALT]).slice(2);  // its for initial account deployment

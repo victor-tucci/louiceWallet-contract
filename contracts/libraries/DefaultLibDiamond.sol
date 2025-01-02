@@ -10,7 +10,7 @@ error InitializationFunctionReverted(
 
 library DefaultLibDiamond {
     bytes32 constant DIAMOND_STORAGE_POSITION =
-        keccak256("louiceWallet.diamond.storage");
+        keccak256("safeHodlWallet.diamond.storage");
 
     struct FacetAddressAndPosition {
         address facetAddress;

@@ -16,12 +16,12 @@ import {IERC165} from "../interfaceMain/ERC/IERC165.sol";
 
 /**
  * @title DefaultFallbackHandler
- * @dev A default fallback handler for Barz
+ * @dev A default fallback handler for SafeHodl
  * @author victor tucci (@victor-tucci)
  */
 contract DefaultFallbackHandler is IDiamondLoupe, Ownable2Step {
     /**
-     * @notice Sets the middleware diamond for Barz wallet as a fallback handler
+     * @notice Sets the middleware diamond for SafeHodl wallet as a fallback handler
      * @dev This contract is also a diamond that holds the default facets to reduce gas cost for wallet activation.
      *      Within the constructor this conducts diamond cut to initially setup the diamond. This is a non-upgradeable contract
      * @param _owner Address of owner who has access to handle the facets
@@ -107,7 +107,7 @@ contract DefaultFallbackHandler is IDiamondLoupe, Ownable2Step {
      * @notice Add/replace/remove any number of functions and optionally execute
      *         a function with delegatecall when guardians don't exist
      * @param _diamondCut Contains the facet addresses and function selectors
-     * @param _init The address of the contract or facet to execute _calldata. It's prohibited in Louice
+     * @param _init The address of the contract or facet to execute _calldata. It's prohibited in SafeHodl
      */
     function diamondCut(
         IDiamondCut.FacetCut[] calldata _diamondCut,

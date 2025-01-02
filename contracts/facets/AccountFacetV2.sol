@@ -7,7 +7,7 @@ import {IEntryPoint} from "@account-abstraction/contracts/interfaces/IEntryPoint
 import {UserOperation} from "@account-abstraction/contracts/interfaces/UserOperation.sol";
 
 import {BaseAccount} from "@account-abstraction/contracts/core/BaseAccount.sol";
-import {LibAppStorage, BarzStorage} from "../libraries/LibAppStorage.sol";
+import {LibAppStorage, SafeHodlStorage} from "../libraries/LibAppStorage.sol";
 import {LibDiamond} from "../libraries/LibDiamond.sol";
 import {LibLoupe} from "../libraries/LibLoupe.sol";
 
@@ -28,7 +28,7 @@ import {IAccountFacet} from "./interfacesAccount/IAccountFacet.sol";
  *      compatible with EIP-1271 & EIP-4337
  * @author victor tucci (@victor-tucci)
  */
-contract AccountFacetV2 is IAccountFacet, BarzStorage, BaseAccount {
+contract AccountFacetV2 is IAccountFacet, SafeHodlStorage, BaseAccount {
     using ECDSA for bytes32;
 
     /**
@@ -39,17 +39,17 @@ contract AccountFacetV2 is IAccountFacet, BarzStorage, BaseAccount {
     }
 
     /**
-     * @notice Returns the address of EntryPoint contract registered to Barz account
+     * @notice Returns the address of EntryPoint contract registered to SafeHodl account
      */
     function entryPoint() public view override returns (IEntryPoint) {
         return s.entryPoint;
     }
 
     /**
-     * @notice Initializes the initial storage of the Barz contract.
+     * @notice Initializes the initial storage of the SafeHodl contract.
      * @dev This method can only be called during the initialization or signature migration.
      *      If the proxy contract was created without initialization, anyone can call initialize.
-     *      Barz calls initialize in constructor in an atomic transaction during deployment
+     *      SafeHodl calls initialize in constructor in an atomic transaction during deployment
      * @param _verificationFacet Facet contract handling the verificationi
      * @param _anEntryPoint Entrypoint contract defined in EIP-4337 handling the flow of UserOp
      * @param _facetRegistry Registry of Facets that hold all facet information
@@ -77,7 +77,7 @@ contract AccountFacetV2 is IAccountFacet, BarzStorage, BaseAccount {
             _ownerPublicKey
         );
         // Every Verification Facet should comply with initializeSigner(bytes)
-        // to be compatible with the Barz contract(for initialization)
+        // to be compatible with the SafeHodl contract(for initialization)
         (bool success, bytes memory result) = _verificationFacet.delegatecall(
             initCall
         );
@@ -123,7 +123,7 @@ contract AccountFacetV2 is IAccountFacet, BarzStorage, BaseAccount {
     /**
      * @notice Calls the destination with inputted calldata and value from EntryPoint
      * @dev This method executes the calldata coming from the EntryPoint.
-     *      Louice will make a call to this function for majority of typical execution(e.g. Swap, Token Transfer)
+     *      SafeHodl will make a call to this function for majority of typical execution(e.g. Swap, Token Transfer)
      * @param _dest Address of destination where the call will be forwarded to
      * @param _value Amount of native coin the owner is willing to send(e.g. ETH, BNB)
      * @param _func Bytes of calldata to execute in the destination address
@@ -165,7 +165,7 @@ contract AccountFacetV2 is IAccountFacet, BarzStorage, BaseAccount {
     /**
      * @notice Validates the signature field of UserOperation
      * @dev This method validates if the signature of UserOp is indeed valid by delegating the call to Verification Facet
-     *      Barz makes a call to the pre-registered Verification Facet address in App Storage
+     *      SafeHodl makes a call to the pre-registered Verification Facet address in App Storage
      * @param _userOp UserOperation from owner to be validated
      * @param _userOpHash Hash of UserOperation given from the EntryPoint contract
      */
@@ -194,7 +194,7 @@ contract AccountFacetV2 is IAccountFacet, BarzStorage, BaseAccount {
 
     /**
      * @notice Calls the target with the inputted value and calldata
-     * @dev This method is the actual function in Barz that makes a call with an arbitrary owner-given data
+     * @dev This method is the actual function in SafeHodl that makes a call with an arbitrary owner-given data
      * @param _target Address of the destination contract which the call is getting forwarded to
      * @param _value Amount of Native coin the owner is wanting to make in this call
      * @param _data Calldata the owner is forwarding together in the call e.g. Swap/Token Transfer

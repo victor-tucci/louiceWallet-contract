@@ -7,7 +7,7 @@ const web3 = new Web3(process.env.RPC_URL); // Replace with your RPC URL
 PRIVATE_KEY="0x" + process.env.PRIVATE_KEY
 const account = web3.eth.accounts.privateKeyToAccount(PRIVATE_KEY);
 
-const LouiceFactoryABI = require("../artifacts/contracts/LouiceFactory.sol/LouiceFactory.json"); // Replace with your actual ABI file
+const SafeHodlFactoryABI = require("../artifacts/contracts/SafeHodlFactory.sol/SafeHodlFactory.json"); // Replace with your actual ABI file
 
 // Owenert details
 const pubkeyX = "0xd5e752f42463c4aa42555832eaf4a45d09cf767d435c921515184faaa3d9a0dd";
@@ -18,34 +18,34 @@ const publicKey = prefix + pubkeyX.slice(2) + pubkeyY.slice(2);
 
 const SALT = 21;
 
-// Function to get the Louice address from the factory contract
-const getAddressFromFactoryContract = async (LouiceFactory) => {
+// Function to get the SafeHodl address from the factory contract
+const getAddressFromFactoryContract = async (SafeHodlFactory) => {
     try {
-        const louiceAddress = await LouiceFactory.methods
+        const safeHodlAddress = await SafeHodlFactory.methods
             .getAddress(process.env.SECP256R1_VERIFIER, publicKey, SALT)
             .call();
-        console.log({ louiceAddress });
+        console.log({ safeHodlAddress });
     } catch (error) {
         console.error("Error in getAddressFromFactoryContract:", error);
     }
 };
 
-const callCreateAccount = async (LouiceFactory) => {
+const callCreateAccount = async (SafeHodlFactory) => {
     try{
         // Encode the transaction data
-        const data = LouiceFactory.methods.createAccount(process.env.SECP256R1_VERIFIER, publicKey, SALT).encodeABI();
+        const data = SafeHodlFactory.methods.createAccount(process.env.SECP256R1_VERIFIER, publicKey, SALT).encodeABI();
         // Get the transaction count (nonce)
         const nonce = await web3.eth.getTransactionCount(account.address);
 
         // Estimate gas
-        const gas = await LouiceFactory.methods
+        const gas = await SafeHodlFactory.methods
             .createAccount(process.env.SECP256R1_VERIFIER, publicKey, SALT)
             .estimateGas({ from: account.address });
 
         // Set up the transaction
         const tx = {
             from: account.address,
-            to: process.env.LOUICE_FACTORY,
+            to: process.env.SAFEHODL_FACTORY,
             data,
             gas,
             nonce,
@@ -67,14 +67,14 @@ const callCreateAccount = async (LouiceFactory) => {
 async function main() {
 
     // Get the contract instance
-    const LouiceFactory = new web3.eth.Contract(LouiceFactoryABI.abi, process.env.LOUICE_FACTORY);
+    const SafeHodlFactory = new web3.eth.Contract(SafeHodlFactoryABI.abi, process.env.SAFEHODL_FACTORY);
 
     try {
-        const accountFacet = await LouiceFactory.methods.accountFacet().call();
+        const accountFacet = await SafeHodlFactory.methods.accountFacet().call();
         // console.log("Account Facet Address:", accountFacet);
 
-        await getAddressFromFactoryContract(LouiceFactory);
-        // await callCreateAccount(LouiceFactory);
+        await getAddressFromFactoryContract(SafeHodlFactory);
+        // await callCreateAccount(SafeHodlFactory);
     } catch (error) {
         console.error("Error in main function:", error);
     }
